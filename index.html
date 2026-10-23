@@ -48,6 +48,10 @@
   }
   .dir{font-size:13.5px;background:#f1f8f2;border-left:4px solid var(--green2);
        padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:14px;}
+  
+  .bg-info{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:15px;font-size:13.5px;margin-bottom:15px;}
+  .bg-info ul{margin:10px 0 0 20px;padding:0;}
+  .bg-info li{margin-bottom:6px;}
 
   /* ===== TABLES ===== */
   table{width:100%;border-collapse:collapse;font-size:13.5px;}
@@ -60,7 +64,7 @@
   select{
     padding:7px 9px;border:1.6px solid var(--line);border-radius:6px;
     font-size:13.5px;font-family:inherit;background:#fff;cursor:pointer;
-    min-width:150px;
+    min-width:150px; max-width:100%;
   }
   select:focus{outline:2px solid #8fd19e;border-color:var(--green2);}
   select.ok{border-color:#16a34a;background:#e9f9ee;}
@@ -121,20 +125,6 @@
   #keybox.show{display:block;}
   #keybox b{color:var(--green);}
 
-  /* ===== ANNOUNCEMENT ===== */
-  .announce{
-    max-width:920px;margin:26px auto 0;background:#fff;border-radius:12px;
-    padding:26px 30px;box-shadow:0 6px 22px rgba(0,0,0,.10);
-    border-top:6px solid #f59e0b;
-  }
-  .announce h3{margin:0 0 12px;font-size:17px;color:#b45309;}
-  .announce pre{
-    white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.7;
-    background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:16px 18px;margin:0 0 12px;
-  }
-  .copy-btn{background:#f59e0b;color:#fff;padding:10px 22px;font-size:14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;}
-  .copy-btn:hover{background:#d97706;}
-
   @media(max-width:680px){
     .sheet{padding:22px 16px 34px;}
     .info{grid-template-columns:1fr;}
@@ -144,8 +134,8 @@
   }
   @media print{
     body{background:#fff;padding:0;}
-    .sheet,.announce{box-shadow:none;max-width:100%;}
-    .btnbar,.announce,.teacher-note{display:none !important;}
+    .sheet{box-shadow:none;max-width:100%;}
+    .btnbar,.teacher-note{display:none !important;}
   }
 </style>
 </head>
@@ -159,7 +149,7 @@
     <p class="gov">Department of Education &middot; Region XII</p>
     <p class="gov">Schools Division of Sarangani</p>
     <p class="school">PABLO OMEREZ CEDEÑO MEMORIAL LEARNING CENTER, INC.</p>
-    <p class="addr">Lanzones St., Malungon, Sarangani Manila</p>
+    <p class="addr">Lanzones St., Malungon, Sarangani</p>
 
     <p class="las-title">LEARNING ACTIVITY SHEET SA SCIENCE 7</p>
     <p class="las-sub">Paksa: <b>Antas ng Biological Organization</b> &nbsp;|&nbsp; Hierarchical Organization of Life</p>
@@ -177,11 +167,154 @@
     </label>
   </div>
 
+  <!-- ================= PART A ================= -->
+  <h3 class="sec">PART A — BALIK-ARAL! (Impormasyon)</h3>
+  <div class="bg-info">
+    <p>Ang buhay ay may maayos na organisasyon, mula sa pinakamaliit na bahagi hanggang sa buong mundo. Tinatawag itong <b>Hierarchical Organization of Life</b>.</p>
+    <ul>
+      <li><b>Cell:</b> Pinakamaliit na yunit ng buhay. (Hal. nerve cell)</li>
+      <li><b>Tissue:</b> Grupo ng magkakatulad na selula na magkatuwang gumagana. (Hal. muscle tissue)</li>
+      <li><b>Organ:</b> Grupo ng iba't ibang tissue. (Hal. puso, baga)</li>
+      <li><b>Organ System:</b> Grupo ng mga organ na may iisang pangunahing gawain. (Hal. digestive system)</li>
+      <li><b>Organism:</b> Isang buong nabubuhay na nilalang. (Hal. tao, aso, puno)</li>
+      <li><b>Population:</b> Grupo ng magkakaparehong species sa isang lugar. (Hal. mga tilapia sa pond)</li>
+      <li><b>Community:</b> Iba't ibang populasyon na namumuhay nang sama-sama. (Hal. halaman at hayop sa gubat)</li>
+      <li><b>Ecosystem:</b> Pakikipag-ugnayan ng nabubuhay na bagay sa hindi nabubuhay (lupa, tubig, araw).</li>
+      <li><b>Biosphere:</b> Pinakamataas na antas. Sakop ang lahat ng ecosystem sa buong mundo.</li>
+    </ul>
+  </div>
+
+  <!-- ================= PART B ================= -->
+  <h3 class="sec">PART B — ITUGMA! (9 puntos)</h3>
+  <div class="dir">
+    <b>Panuto:</b> Basahin ang deskripsyon sa Hanay A. Piliin ang katumbas na antas ng organisasyon mula sa Hanay B gamit ang dropdown.
+  </div>
+
+  <table id="partB">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Hanay A (Deskripsyon)</th>
+        <th style="width:220px;">Hanay B (Antas)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td>Isang grupo ng magkakaibang organ na magkatuwang gumagana (hal. puso at ugat).</td>
+        <td><div class="selwrap">
+          <select data-answer="organsystem">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td>Ang buong planeta at lahat ng nabubuhay na bagay at kapaligiran dito.</td>
+        <td><div class="selwrap">
+          <select data-answer="biosphere">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td>Isang buo at kumpletong nabubuhay na nilalang (hal. puno ng mangga).</td>
+        <td><div class="selwrap">
+          <select data-answer="organism">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td>Pinakamaliit na yunit ng buhay (hal. bacterium).</td>
+        <td><div class="selwrap">
+          <select data-answer="cell">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td>Grupo ng magkakaparehong organismo (hal. lahat ng pusa sa isang barangay).</td>
+        <td><div class="selwrap">
+          <select data-answer="population">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td>Grupo ng magkakatulad na selula (hal. panlabas na balat).</td>
+        <td><div class="selwrap">
+          <select data-answer="tissue">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td>Komunidad ng mga buhay na bagay na nakikipag-ugnayan sa kapaligiran.</td>
+        <td><div class="selwrap">
+          <select data-answer="ecosystem">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">8</td>
+        <td>Iba't ibang populasyon na namumuhay at nag-uugnayan sa isang lugar.</td>
+        <td><div class="selwrap">
+          <select data-answer="community">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">9</td>
+        <td>Bahagi ng organismo na may tiyak na gawain (hal. utak).</td>
+        <td><div class="selwrap">
+          <select data-answer="organ">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
   <!-- ================= PART C ================= -->
   <h3 class="sec">PART C — AYUSIN ANG HIERARCHY! (9 puntos)</h3>
   <div class="dir">
     <b>Panuto:</b> Ayusin ang mga antas ng biological organization mula sa <b>pinakamaliit at pinakasimple (1)</b>
-    hanggang sa <b>pinakamalaki at pinakamasalimuot (9)</b>. Piliin ang tamang bilang sa dropdown box.
+    hanggang sa <b>pinakamalaki at pinakamasalimuot (9)</b>.
   </div>
 
   <table id="partC">
@@ -254,7 +387,7 @@
   <h3 class="sec">PART D — MGA HALIMBAWA SA TOTOONG BUHAY! (9 puntos)</h3>
   <div class="dir">
     <b>Panuto:</b> Pag-aralan ang larawan ng <b>Rice Terraces</b>. Tukuyin kung anong <b>antas ng biological organization</b>
-    ang inilalarawan sa bawat bilang. Piliin ang sagot sa dropdown box.
+    ang inilalarawan sa bawat bilang.
   </div>
 
   <figure>
@@ -424,7 +557,7 @@
   <!-- ================= PART E ================= -->
   <h3 class="sec">PART E — PAG-ISIPAN NATIN! (9 puntos — susuriin ng guro)</h3>
   <div class="dir">
-    <b>Panuto:</b> Sagutin ang mga tanong sa 2–3 buong pangungusap. Isulat sa loob ng kahon.
+    <b>Panuto:</b> Sagutin ang mga tanong sa 2–3 buong pangungusap.
   </div>
 
   <div class="q">
@@ -453,20 +586,22 @@
   <div id="scorebox">
     <h4>📊 AKING ISKOR</h4>
     <div class="scoregrid">
+      <div class="cell-line"><span>Part B — Itugma</span><b><span id="sb">0</span> / 9</b></div>
       <div class="cell-line"><span>Part C — Ayusin ang Hierarchy</span><b><span id="sc">0</span> / 9</b></div>
-      <div class="cell-line"><span>Part D — Mga Halimbawa sa Totoong Buhay</span><b><span id="sd">0</span> / 9</b></div>
-      <div class="cell-line auto"><span>AUTO-COMPUTED NA ISKOR</span><b><span id="sauto">0</span> / 18</b></div>
+      <div class="cell-line"><span>Part D — Mga Halimbawa</span><b><span id="sd">0</span> / 9</b></div>
+      <div class="cell-line auto"><span>AUTO-COMPUTED NA ISKOR</span><b><span id="sauto">0</span> / 27</b></div>
       <div class="cell-line"><span>Part E — Sanaysay (Guro)</span><b><input type="number" id="se" min="0" max="9" value="0" /> / 9</b></div>
-      <div class="total"><span>KABUUANG ISKOR</span><span><span id="stotal">0</span> / 27</span></div>
+      <div class="total"><span>KABUUANG ISKOR</span><span><span id="stotal">0</span> / 36</span></div>
     </div>
     <p class="teacher-note">
-      <b>Paalala:</b> Ang Part C at Part D ay awtomatikong naiiskor ng system. Ang <b>Part E</b> ay susuriin ng guro
+      <b>Paalala:</b> Ang Part B, C, at D ay awtomatikong naiiskor ng system. Ang <b>Part E</b> ay susuriin ng guro
       (0–9 puntos). I-screenshot ang buong page kasama ang score box at i-send sa PM ng guro.
     </p>
     <div style="text-align:center;margin-top:14px;">
       <button class="btn-reset" style="padding:7px 16px;font-size:12.5px;" onclick="toggleKey()">🔑 Ipakita / Itago ang Answer Key (Guro Lamang)</button>
     </div>
     <div id="keybox">
+      <b>PART B:</b> 1-Organ System, 2-Biosphere, 3-Organism, 4-Cell, 5-Population, 6-Tissue, 7-Ecosystem, 8-Community, 9-Organ<br><br>
       <b>PART C:</b> Cell 1 · Tissue 2 · Organ 3 · Organ System 4 · Organism 5 · Population 6 · Community 7 · Ecosystem 8 · Biosphere 9<br><br>
       <b>PART D:</b> 1-Organism · 2-Population · 3-Community · 4-Ecosystem · 5-Biosphere · 6-Organ System · 7-Organ · 8-Tissue · 9-Cell
     </div>
@@ -474,36 +609,9 @@
 
 </div><!-- /sheet -->
 
-<!-- ===================== GC ANNOUNCEMENT ===================== -->
-<div class="announce">
-  <h3>📢 ANNOUNCEMENT PARA SA GC (i-copy at i-paste sa group chat)</h3>
-  <pre id="annText">📢 ANNOUNCEMENT — SCIENCE 7
-Levels of Biological Organization
-
-Magandang araw sa lahat! 🌞
-
-Ang ating Learning Activity Sheet sa Science 7 ay ONLINE na ninyong sasagutan. Paki-sunod ang mga sumusunod:
-
-🔗 LINK: [i-paste dito ang link ng LAS]
-
-📝 MGA PAALALA:
-1️⃣ Isulat ang inyong BUONG PANGALAN, GRADE AT SECTION, at PETSA.
-2️⃣ Sagutin ang PART C, PART D, at PART E.
-3️⃣ Kapag tapos na, pindutin ang "✅ TINGNAN ANG ISKOR" para makita ang inyong iskor.
-4️⃣ I-SCREENSHOT ang buong page — siguraduhing MAKITA ang SCORE SA IBABA.
-5️⃣ I-send ang screenshot sa AKING PM (private message). HUWAG ninyong ilagay sa GC ang screenshot.
-
-⏰ DEADLINE: ______________
-
-Kung may problema o hindi makapasok sa link, i-PM lang ako agad.
-
-Salamat at padayon! 💚
-— Teacher [Pangalan]</pre>
-  <button class="copy-btn" onclick="copyAnn()">📋 Copy Announcement</button>
-</div>
-
 <script>
 /* ================= SCORING LOGIC ================= */
+const selectsB = () => Array.from(document.querySelectorAll('#partB select'));
 const selectsC = () => Array.from(document.querySelectorAll('#partC select'));
 const selectsD = () => Array.from(document.querySelectorAll('#partD select'));
 
@@ -521,30 +629,35 @@ function markSelect(sel){
 }
 
 function checkAnswers(){
-  let scoreC = 0, scoreD = 0;
+  let scoreB = 0, scoreC = 0, scoreD = 0;
 
+  selectsB().forEach(s => scoreB += markSelect(s));
   selectsC().forEach(s => scoreC += markSelect(s));
   selectsD().forEach(s => scoreD += markSelect(s));
 
+  document.getElementById('sb').textContent = scoreB;
   document.getElementById('sc').textContent = scoreC;
   document.getElementById('sd').textContent = scoreD;
-  document.getElementById('sauto').textContent = scoreC + scoreD;
+  
+  const autoTotal = scoreB + scoreC + scoreD;
+  document.getElementById('sauto').textContent = autoTotal;
 
-  updateTotal();
+  updateTotal(autoTotal);
 
   const box = document.getElementById('scorebox');
   box.classList.add('show');
   box.scrollIntoView({behavior:'smooth', block:'center'});
 }
 
-function updateTotal(){
-  const auto = parseInt(document.getElementById('sauto').textContent) || 0;
+let currentAutoTotal = 0;
+function updateTotal(auto){
+  if(auto !== undefined) currentAutoTotal = auto;
   let e = parseInt(document.getElementById('se').value) || 0;
   if(e < 0) e = 0;
   if(e > 9) e = 9;
-  document.getElementById('stotal').textContent = auto + e;
+  document.getElementById('stotal').textContent = currentAutoTotal + e;
 }
-document.getElementById('se').addEventListener('input', updateTotal);
+document.getElementById('se').addEventListener('input', function() { updateTotal(); });
 
 function resetAll(){
   if(!confirm('Sigurado ka bang gusto mong i-reset ang lahat ng sagot?')) return;
@@ -556,6 +669,7 @@ function resetAll(){
   });
   document.querySelectorAll('textarea').forEach(t => t.value = '');
   document.getElementById('se').value = 0;
+  document.getElementById('sb').textContent = 0;
   document.getElementById('sc').textContent = 0;
   document.getElementById('sd').textContent = 0;
   document.getElementById('sauto').textContent = 0;
@@ -567,23 +681,6 @@ function resetAll(){
 
 function toggleKey(){
   document.getElementById('keybox').classList.toggle('show');
-}
-
-function copyAnn(){
-  const text = document.getElementById('annText').innerText;
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=>{
-      const b = document.querySelector('.copy-btn');
-      const old = b.textContent;
-      b.textContent = '✅ Copied!';
-      setTimeout(()=>b.textContent = old, 1800);
-    });
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = text; document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-    alert('Copied!');
-  }
 }
 </script>
 </body>
