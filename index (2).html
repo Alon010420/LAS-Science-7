@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LAS – Science 7 | Antas ng Biological Organization</title>
+<style>
+  :root{
+    --green:#0b5d1e;
+    --green2:#3a9e46;
+    --ink:#1f2937;
+    --line:#cbd5e1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;padding:18px;background:#eef3f8;
+    font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+    color:var(--ink);line-height:1.55;
+  }
+  .sheet{
+    max-width:920px;margin:0 auto;background:#fff;
+    padding:32px 34px 46px;border-radius:12px;
+    box-shadow:0 6px 22px rgba(0,0,0,.12);
+  }
+
+  /* ===== HEADER ===== */
+  header{text-align:center;border-bottom:3px double var(--green);padding-bottom:14px;}
+  header .gov{margin:1px 0;font-size:13px;}
+  header .school{margin:8px 0 2px;font-size:17px;font-weight:700;color:var(--green);letter-spacing:.3px;}
+  header .addr{margin:0;font-size:12.5px;color:#475569;}
+  header .las-title{margin:16px 0 2px;font-size:16px;font-weight:700;letter-spacing:.5px;}
+  header .las-sub{margin:0;font-size:13px;color:#475569;}
+
+  /* ===== INFO FIELDS ===== */
+  .info{display:grid;grid-template-columns:2fr 1.3fr 1fr;gap:12px;margin-top:18px;}
+  .field{display:flex;flex-direction:column;font-size:12.5px;font-weight:600;color:#334155;}
+  .field input{
+    margin-top:4px;padding:8px 10px;border:1px solid var(--line);
+    border-radius:6px;font-size:14px;font-family:inherit;background:#fbfdff;
+  }
+  .field input:focus{outline:2px solid #8fd19e;border-color:var(--green2);}
+
+  /* ===== SECTION TITLES ===== */
+  h3.sec{
+    background:linear-gradient(90deg,var(--green),var(--green2));
+    color:#fff;padding:8px 14px;border-radius:6px;
+    font-size:15px;margin:28px 0 12px;letter-spacing:.3px;
+  }
+  .dir{font-size:13.5px;background:#f1f8f2;border-left:4px solid var(--green2);
+       padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:14px;}
+
+  /* ===== TABLES ===== */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle;}
+  th{background:#e8f4ea;color:#14532d;font-size:12.5px;text-transform:uppercase;letter-spacing:.4px;}
+  tbody tr:nth-child(even){background:#fafdfb;}
+  .num{width:38px;text-align:center;font-weight:700;color:var(--green);}
+  .selwrap{display:flex;align-items:center;gap:8px;}
+
+  select{
+    padding:7px 9px;border:1.6px solid var(--line);border-radius:6px;
+    font-size:13.5px;font-family:inherit;background:#fff;cursor:pointer;
+    min-width:150px;
+  }
+  select:focus{outline:2px solid #8fd19e;border-color:var(--green2);}
+  select.ok{border-color:#16a34a;background:#e9f9ee;}
+  select.bad{border-color:#dc2626;background:#fdeaea;}
+  select.blank{border-color:#f59e0b;background:#fffaf0;}
+
+  .mark{font-weight:800;font-size:15px;width:18px;display:inline-block;text-align:center;}
+  .mark.ok{color:#16a34a;}
+  .mark.bad{color:#dc2626;}
+  .mark.blank{color:#f59e0b;}
+
+  /* ===== PICTURE ===== */
+  figure{margin:0 0 16px;}
+  figcaption{font-size:12.5px;color:#475569;font-style:italic;text-align:center;margin-top:6px;}
+
+  /* ===== ESSAY ===== */
+  .q{margin-bottom:16px;}
+  .q p{margin:0 0 6px;font-size:13.5px;font-weight:600;}
+  textarea{
+    width:100%;min-height:78px;padding:10px;border:1px solid var(--line);
+    border-radius:6px;font-family:inherit;font-size:13.5px;resize:vertical;background:#fbfdff;
+  }
+  textarea:focus{outline:2px solid #8fd19e;border-color:var(--green2);}
+
+  /* ===== BUTTONS ===== */
+  .btnbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;justify-content:center;}
+  button{
+    padding:12px 26px;border:none;border-radius:8px;font-size:14.5px;
+    font-weight:700;font-family:inherit;cursor:pointer;transition:.2s;
+  }
+  .btn-check{background:linear-gradient(90deg,#0b5d1e,#3a9e46);color:#fff;box-shadow:0 4px 10px rgba(11,93,30,.3);}
+  .btn-check:hover{transform:translateY(-2px);box-shadow:0 7px 16px rgba(11,93,30,.35);}
+  .btn-reset{background:#e2e8f0;color:#334155;}
+  .btn-reset:hover{background:#cbd5e1;}
+  .btn-print{background:#1d4ed8;color:#fff;}
+  .btn-print:hover{background:#1e40af;}
+
+  /* ===== SCORE BOX ===== */
+  #scorebox{
+    margin-top:26px;border:3px solid var(--green);border-radius:12px;
+    padding:18px 22px;background:#f4fbf5;display:none;
+  }
+  #scorebox.show{display:block;animation:pop .35s ease;}
+  @keyframes pop{from{transform:scale(.96);opacity:0;}to{transform:scale(1);opacity:1;}}
+  #scorebox h4{margin:0 0 12px;font-size:16px;color:var(--green);}
+  .scoregrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;font-size:14px;}
+  .scoregrid .cell-line{display:flex;justify-content:space-between;padding:7px 10px;background:#fff;border:1px solid #cfe6d3;border-radius:6px;}
+  .scoregrid .auto{background:#e3f5e6;border:2px solid var(--green2);font-weight:700;}
+  .scoregrid .total{grid-column:1/-1;background:var(--green);color:#fff;font-size:17px;font-weight:800;
+                     display:flex;justify-content:space-between;padding:12px 16px;border-radius:8px;margin-top:4px;}
+  #se{width:62px;padding:5px 8px;border:1.5px solid var(--line);border-radius:6px;font-size:14px;text-align:center;font-family:inherit;}
+
+  .teacher-note{font-size:12.5px;color:#7c2d12;background:#fff7ed;border-left:4px solid #f59e0b;
+                padding:8px 12px;border-radius:0 6px 6px 0;margin-top:14px;}
+
+  /* ===== ANSWER KEY ===== */
+  #keybox{display:none;margin-top:18px;font-size:13px;background:#f8fafc;border:1px dashed #94a3b8;border-radius:8px;padding:14px 18px;}
+  #keybox.show{display:block;}
+  #keybox b{color:var(--green);}
+
+  /* ===== ANNOUNCEMENT ===== */
+  .announce{
+    max-width:920px;margin:26px auto 0;background:#fff;border-radius:12px;
+    padding:26px 30px;box-shadow:0 6px 22px rgba(0,0,0,.10);
+    border-top:6px solid #f59e0b;
+  }
+  .announce h3{margin:0 0 12px;font-size:17px;color:#b45309;}
+  .announce pre{
+    white-space:pre-wrap;font-family:inherit;font-size:14px;line-height:1.7;
+    background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:16px 18px;margin:0 0 12px;
+  }
+  .copy-btn{background:#f59e0b;color:#fff;padding:10px 22px;font-size:14px;border-radius:8px;border:none;cursor:pointer;font-weight:700;}
+  .copy-btn:hover{background:#d97706;}
+
+  @media(max-width:680px){
+    .sheet{padding:22px 16px 34px;}
+    .info{grid-template-columns:1fr;}
+    .scoregrid{grid-template-columns:1fr;}
+    th,td{padding:6px 7px;font-size:12.5px;}
+    select{min-width:120px;font-size:12.5px;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .sheet,.announce{box-shadow:none;max-width:100%;}
+    .btnbar,.announce,.teacher-note{display:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== ACTIVITY SHEET ===================== -->
+<div class="sheet">
+
+  <header>
+    <p class="gov">Republic of the Philippines</p>
+    <p class="gov">Department of Education &middot; Region XII</p>
+    <p class="gov">Schools Division of Sarangani</p>
+    <p class="school">PABLO OMEREZ CEDEÑO MEMORIAL LEARNING CENTER, INC.</p>
+    <p class="addr">Lanzones St., Malungon, Sarangani Manila</p>
+
+    <p class="las-title">LEARNING ACTIVITY SHEET SA SCIENCE 7</p>
+    <p class="las-sub">Paksa: <b>Antas ng Biological Organization</b> &nbsp;|&nbsp; Hierarchical Organization of Life</p>
+  </header>
+
+  <div class="info">
+    <label class="field">Pangalan (Buong Pangalan)
+      <input type="text" id="fname" placeholder="Isulat ang buong pangalan dito..." />
+    </label>
+    <label class="field">Grade at Seksyon
+      <input type="text" id="fsec" placeholder="Hal. 7 – Rizal" />
+    </label>
+    <label class="field">Petsa
+      <input type="text" id="fdate" placeholder="MM/DD/YYYY" />
+    </label>
+  </div>
+
+  <!-- ================= PART C ================= -->
+  <h3 class="sec">PART C — AYUSIN ANG HIERARCHY! (9 puntos)</h3>
+  <div class="dir">
+    <b>Panuto:</b> Ayusin ang mga antas ng biological organization mula sa <b>pinakamaliit at pinakasimple (1)</b>
+    hanggang sa <b>pinakamalaki at pinakamasalimuot (9)</b>. Piliin ang tamang bilang sa dropdown box.
+  </div>
+
+  <table id="partC">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Antas ng Biological Organization</th>
+        <th style="width:220px;">Iyong Sagot (1–9)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td><td>Organism</td>
+        <td><div class="selwrap">
+          <select data-answer="5"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">2</td><td>Ecosystem</td>
+        <td><div class="selwrap">
+          <select data-answer="8"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">3</td><td>Cell</td>
+        <td><div class="selwrap">
+          <select data-answer="1"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">4</td><td>Community</td>
+        <td><div class="selwrap">
+          <select data-answer="7"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">5</td><td>Organ System</td>
+        <td><div class="selwrap">
+          <select data-answer="4"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">6</td><td>Biosphere</td>
+        <td><div class="selwrap">
+          <select data-answer="9"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">7</td><td>Tissue</td>
+        <td><div class="selwrap">
+          <select data-answer="2"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">8</td><td>Population</td>
+        <td><div class="selwrap">
+          <select data-answer="6"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">9</td><td>Organ</td>
+        <td><div class="selwrap">
+          <select data-answer="3"><option value="">-- piliin --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option></select>
+          <span class="mark"></span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PART D ================= -->
+  <h3 class="sec">PART D — MGA HALIMBAWA SA TOTOONG BUHAY! (9 puntos)</h3>
+  <div class="dir">
+    <b>Panuto:</b> Pag-aralan ang larawan ng <b>Rice Terraces</b>. Tukuyin kung anong <b>antas ng biological organization</b>
+    ang inilalarawan sa bawat bilang. Piliin ang sagot sa dropdown box.
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 640 300" role="img" aria-label="Rice terraces illustration">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#a8ddff"/><stop offset="100%" stop-color="#e8f7ff"/>
+        </linearGradient>
+        <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7fb98a"/><stop offset="100%" stop-color="#4e8f61"/>
+        </linearGradient>
+      </defs>
+      <rect width="640" height="300" fill="url(#sky)"/>
+      <circle cx="530" cy="58" r="42" fill="#ffd93b" opacity="0.22"/>
+      <circle cx="530" cy="58" r="27" fill="#ffd93b" opacity="0.95"/>
+      <ellipse cx="130" cy="55" rx="46" ry="17" fill="#fff" opacity=".85"/>
+      <ellipse cx="172" cy="47" rx="33" ry="14" fill="#fff" opacity=".85"/>
+      <ellipse cx="380" cy="42" rx="38" ry="14" fill="#fff" opacity=".7"/>
+      <path d="M0 150 L90 78 L150 128 L230 70 L320 140 L400 88 L500 145 L580 100 L640 150 L640 300 L0 300 Z" fill="url(#hill)"/>
+      <path d="M0 168 Q160 140 320 166 T640 158 L640 300 L0 300 Z" fill="#a9d47a"/>
+      <path d="M0 196 Q160 168 320 194 T640 186 L640 300 L0 300 Z" fill="#8dc45f"/>
+      <path d="M0 224 Q160 196 320 222 T640 214 L640 300 L0 300 Z" fill="#74b34c"/>
+      <path d="M0 252 Q160 224 320 250 T640 242 L640 300 L0 300 Z" fill="#5ea03c"/>
+      <path d="M0 280 Q160 252 320 278 T640 270 L640 300 L0 300 Z" fill="#4b8a30"/>
+      <path d="M0 196 Q160 168 320 194 T640 186 L640 193 Q320 201 0 203 Z" fill="#cfe9ff" opacity=".55"/>
+      <path d="M0 224 Q160 196 320 222 T640 214 L640 221 Q320 229 0 231 Z" fill="#cfe9ff" opacity=".5"/>
+      <path d="M0 252 Q160 224 320 250 T640 242 L640 249 Q320 257 0 259 Z" fill="#cfe9ff" opacity=".45"/>
+      <g stroke="#2f6b1f" stroke-width="2" fill="none" stroke-linecap="round">
+        <path d="M70 250 v-18 M70 250 l-7 -14 M70 250 l7 -15 M70 250 l-4 -19 M70 250 l5 -19"/>
+        <path d="M140 236 v-18 M140 236 l-7 -14 M140 236 l7 -15 M140 236 l-4 -19 M140 236 l5 -19"/>
+        <path d="M215 258 v-18 M215 258 l-7 -14 M215 258 l7 -15 M215 258 l-4 -19 M215 258 l5 -19"/>
+        <path d="M300 244 v-18 M300 244 l-7 -14 M300 244 l7 -15 M300 244 l-4 -19 M300 244 l5 -19"/>
+        <path d="M385 262 v-18 M385 262 l-7 -14 M385 262 l7 -15 M385 262 l-4 -19 M385 262 l5 -19"/>
+        <path d="M470 246 v-18 M470 246 l-7 -14 M470 246 l7 -15 M470 246 l-4 -19 M470 246 l5 -19"/>
+        <path d="M555 264 v-18 M555 264 l-7 -14 M555 264 l7 -15 M555 264 l-4 -19 M555 264 l5 -19"/>
+      </g>
+      <g fill="#2f6b1f" opacity=".9">
+        <circle cx="70" cy="228" r="2.4"/><circle cx="140" cy="214" r="2.4"/>
+        <circle cx="215" cy="236" r="2.4"/><circle cx="300" cy="222" r="2.4"/>
+        <circle cx="385" cy="240" r="2.4"/><circle cx="470" cy="224" r="2.4"/>
+        <circle cx="555" cy="242" r="2.4"/>
+      </g>
+    </svg>
+    <figcaption>Figure 1. Rice Terraces — isang halimbawa ng ecosystem na mayaman sa iba't ibang antas ng buhay.</figcaption>
+  </figure>
+
+  <table id="partD">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Sitwasyon / Inilalarawan</th>
+        <th style="width:190px;">Antas ng Organisasyon</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td>Isang <b>puno ng palay</b> na tumutubo sa taniman.</td>
+        <td><div class="selwrap">
+          <select data-answer="organism">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td><b>Lahat</b> ng puno ng palay sa isang terrace.</td>
+        <td><div class="selwrap">
+          <select data-answer="population">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td>Lahat ng <b>iba't ibang populasyon</b> (palay, maya, insekto, damo) na namumuhay at nag-uugnayan sa taniman.</td>
+        <td><div class="selwrap">
+          <select data-answer="community">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td>Ang mga nabubuhay na bagay ay <b>nag-uugnayan</b> sa lupa, tubig, at sikat ng araw.</td>
+        <td><div class="selwrap">
+          <select data-answer="ecosystem">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td>Ang <b>buong daigdig</b> — lahat ng ecosystem sa mundo.</td>
+        <td><div class="selwrap">
+          <select data-answer="biosphere">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td>Ang <b>dahon at tangkay</b> ng palay na magkatuwang na gumagana.</td>
+        <td><div class="selwrap">
+          <select data-answer="organsystem">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td>Isang <b>dahon</b> ng puno ng palay.</td>
+        <td><div class="selwrap">
+          <select data-answer="organ">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">8</td>
+        <td>Ang <b>magkakaparehong selula</b> na bumubuo sa ibabaw ng dahon.</td>
+        <td><div class="selwrap">
+          <select data-answer="tissue">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+      <tr>
+        <td class="num">9</td>
+        <td>Ang <b>pinakamaliit na yunit</b> ng buhay sa dahon ng palay.</td>
+        <td><div class="selwrap">
+          <select data-answer="cell">
+            <option value="">-- piliin --</option>
+            <option value="cell">Cell</option><option value="tissue">Tissue</option><option value="organ">Organ</option>
+            <option value="organsystem">Organ System</option><option value="organism">Organism</option>
+            <option value="population">Population</option><option value="community">Community</option>
+            <option value="ecosystem">Ecosystem</option><option value="biosphere">Biosphere</option>
+          </select><span class="mark"></span></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PART E ================= -->
+  <h3 class="sec">PART E — PAG-ISIPAN NATIN! (9 puntos — susuriin ng guro)</h3>
+  <div class="dir">
+    <b>Panuto:</b> Sagutin ang mga tanong sa 2–3 buong pangungusap. Isulat sa loob ng kahon.
+  </div>
+
+  <div class="q">
+    <p>1. Bakit mahalagang pag-aralan ang iba't ibang antas ng biological organization? Paano nakakatulong ang pag-unawa sa isang selula upang maunawaan ang isang buong organismo?</p>
+    <textarea id="e1" placeholder="Isulat ang iyong sagot dito..."></textarea>
+  </div>
+
+  <div class="q">
+    <p>2. Magbigay ng isang halimbawa mula sa sarili mong katawan para sa bawat antas: Cell, Tissue, Organ, at Organ System.</p>
+    <textarea id="e2" placeholder="Cell: ____ &#10;Tissue: ____ &#10;Organ: ____ &#10;Organ System: ____"></textarea>
+  </div>
+
+  <div class="q">
+    <p>3. Ang isang barangay ay parang isang community. Ano ang magandang halimbawa ng "population" sa loob ng barangay? Ipaliwanag.</p>
+    <textarea id="e3" placeholder="Isulat ang iyong sagot dito..."></textarea>
+  </div>
+
+  <!-- ================= BUTTONS ================= -->
+  <div class="btnbar">
+    <button class="btn-check" onclick="checkAnswers()">✅ TINGNAN ANG ISKOR</button>
+    <button class="btn-reset" onclick="resetAll()">🔄 I-RESET</button>
+    <button class="btn-print" onclick="window.print()">🖨️ I-PRINT / I-SAVE</button>
+  </div>
+
+  <!-- ================= SCORE BOX ================= -->
+  <div id="scorebox">
+    <h4>📊 AKING ISKOR</h4>
+    <div class="scoregrid">
+      <div class="cell-line"><span>Part C — Ayusin ang Hierarchy</span><b><span id="sc">0</span> / 9</b></div>
+      <div class="cell-line"><span>Part D — Mga Halimbawa sa Totoong Buhay</span><b><span id="sd">0</span> / 9</b></div>
+      <div class="cell-line auto"><span>AUTO-COMPUTED NA ISKOR</span><b><span id="sauto">0</span> / 18</b></div>
+      <div class="cell-line"><span>Part E — Sanaysay (Guro)</span><b><input type="number" id="se" min="0" max="9" value="0" /> / 9</b></div>
+      <div class="total"><span>KABUUANG ISKOR</span><span><span id="stotal">0</span> / 27</span></div>
+    </div>
+    <p class="teacher-note">
+      <b>Paalala:</b> Ang Part C at Part D ay awtomatikong naiiskor ng system. Ang <b>Part E</b> ay susuriin ng guro
+      (0–9 puntos). I-screenshot ang buong page kasama ang score box at i-send sa PM ng guro.
+    </p>
+    <div style="text-align:center;margin-top:14px;">
+      <button class="btn-reset" style="padding:7px 16px;font-size:12.5px;" onclick="toggleKey()">🔑 Ipakita / Itago ang Answer Key (Guro Lamang)</button>
+    </div>
+    <div id="keybox">
+      <b>PART C:</b> Cell 1 · Tissue 2 · Organ 3 · Organ System 4 · Organism 5 · Population 6 · Community 7 · Ecosystem 8 · Biosphere 9<br><br>
+      <b>PART D:</b> 1-Organism · 2-Population · 3-Community · 4-Ecosystem · 5-Biosphere · 6-Organ System · 7-Organ · 8-Tissue · 9-Cell
+    </div>
+  </div>
+
+</div><!-- /sheet -->
+
+<!-- ===================== GC ANNOUNCEMENT ===================== -->
+<div class="announce">
+  <h3>📢 ANNOUNCEMENT PARA SA GC (i-copy at i-paste sa group chat)</h3>
+  <pre id="annText">📢 ANNOUNCEMENT — SCIENCE 7
+Levels of Biological Organization
+
+Magandang araw sa lahat! 🌞
+
+Ang ating Learning Activity Sheet sa Science 7 ay ONLINE na ninyong sasagutan. Paki-sunod ang mga sumusunod:
+
+🔗 LINK: [i-paste dito ang link ng LAS]
+
+📝 MGA PAALALA:
+1️⃣ Isulat ang inyong BUONG PANGALAN, GRADE AT SECTION, at PETSA.
+2️⃣ Sagutin ang PART C, PART D, at PART E.
+3️⃣ Kapag tapos na, pindutin ang "✅ TINGNAN ANG ISKOR" para makita ang inyong iskor.
+4️⃣ I-SCREENSHOT ang buong page — siguraduhing MAKITA ang SCORE SA IBABA.
+5️⃣ I-send ang screenshot sa AKING PM (private message). HUWAG ninyong ilagay sa GC ang screenshot.
+
+⏰ DEADLINE: ______________
+
+Kung may problema o hindi makapasok sa link, i-PM lang ako agad.
+
+Salamat at padayon! 💚
+— Teacher [Pangalan]</pre>
+  <button class="copy-btn" onclick="copyAnn()">📋 Copy Announcement</button>
+</div>
+
+<script>
+/* ================= SCORING LOGIC ================= */
+const selectsC = () => Array.from(document.querySelectorAll('#partC select'));
+const selectsD = () => Array.from(document.querySelectorAll('#partD select'));
+
+function markSelect(sel){
+  const wrap = sel.parentElement;
+  const mark = wrap.querySelector('.mark');
+  const ok = sel.value !== '' && sel.value === sel.dataset.answer;
+
+  sel.classList.remove('ok','bad','blank');
+  mark.classList.remove('ok','bad','blank');
+
+  if(sel.value === ''){ sel.classList.add('blank'); mark.textContent = '—'; mark.classList.add('blank'); return 0; }
+  if(ok){ sel.classList.add('ok'); mark.textContent = '✔'; mark.classList.add('ok'); return 1; }
+  sel.classList.add('bad'); mark.textContent = '✘'; mark.classList.add('bad'); return 0;
+}
+
+function checkAnswers(){
+  let scoreC = 0, scoreD = 0;
+
+  selectsC().forEach(s => scoreC += markSelect(s));
+  selectsD().forEach(s => scoreD += markSelect(s));
+
+  document.getElementById('sc').textContent = scoreC;
+  document.getElementById('sd').textContent = scoreD;
+  document.getElementById('sauto').textContent = scoreC + scoreD;
+
+  updateTotal();
+
+  const box = document.getElementById('scorebox');
+  box.classList.add('show');
+  box.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function updateTotal(){
+  const auto = parseInt(document.getElementById('sauto').textContent) || 0;
+  let e = parseInt(document.getElementById('se').value) || 0;
+  if(e < 0) e = 0;
+  if(e > 9) e = 9;
+  document.getElementById('stotal').textContent = auto + e;
+}
+document.getElementById('se').addEventListener('input', updateTotal);
+
+function resetAll(){
+  if(!confirm('Sigurado ka bang gusto mong i-reset ang lahat ng sagot?')) return;
+  document.querySelectorAll('select').forEach(s => {
+    s.value = '';
+    s.classList.remove('ok','bad','blank');
+    const m = s.parentElement.querySelector('.mark');
+    if(m){ m.textContent = ''; m.classList.remove('ok','bad','blank'); }
+  });
+  document.querySelectorAll('textarea').forEach(t => t.value = '');
+  document.getElementById('se').value = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('sd').textContent = 0;
+  document.getElementById('sauto').textContent = 0;
+  document.getElementById('stotal').textContent = 0;
+  document.getElementById('scorebox').classList.remove('show');
+  document.getElementById('keybox').classList.remove('show');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleKey(){
+  document.getElementById('keybox').classList.toggle('show');
+}
+
+function copyAnn(){
+  const text = document.getElementById('annText').innerText;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>{
+      const b = document.querySelector('.copy-btn');
+      const old = b.textContent;
+      b.textContent = '✅ Copied!';
+      setTimeout(()=>b.textContent = old, 1800);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    alert('Copied!');
+  }
+}
+</script>
+</body>
+</html>
